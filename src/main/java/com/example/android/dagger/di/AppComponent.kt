@@ -1,11 +1,15 @@
 package com.example.android.dagger.di
 
 import android.content.Context
+import com.example.android.dagger.login.LoginComponent
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationComponent
 import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
 import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
+import com.example.android.dagger.settings.SettingsActivity
+import com.example.android.dagger.user.UserComponent
+import com.example.android.dagger.user.UserManager
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -19,6 +23,7 @@ import javax.inject.Singleton
  * RegistrationViewModel'in bir örneğini oluşturmak için bağımlılıklarını da karşılaması gerekir.
  * RegistrationViewModel, UserManager'a bağımlıdır. Bu yüzden UserManager'ın da bir nesnesini oluşturur.
  *
+ * @Singleton işaretlenen nesneler bağlı oldukları component hayatta kaldığı sürece aynı değere sahip olurlar.
  * @author hanifekurnaz
  * @sınce 1.0
  * */
@@ -35,13 +40,10 @@ interface AppComponent{
         fun create(@BindsInstance context: Context): AppComponent
     }
 
+    fun userManager(): UserManager
+
     //RegisterActivity'nin RegistrationComponent örneğini oluşturması için oluşturulmuştur
     fun registrationComponent(): RegistrationComponent.Factory
+    fun loginComponent(): LoginComponent.Factory
 
-    /**
-     * RegistrationActivity injection istemektedir ve Activity'nin istediği injection'u sağlaması gerektiğini Dagger'a belirtiyoruz
-     * @author hanifekurnaz
-     * @sınce 1.0
-     * */
-    fun inject(activity : MainActivity)
 }

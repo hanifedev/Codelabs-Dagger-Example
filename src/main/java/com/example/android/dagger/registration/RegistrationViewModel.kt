@@ -16,6 +16,7 @@
 
 package com.example.android.dagger.registration
 
+import com.example.android.dagger.di.ActivityScope
 import com.example.android.dagger.user.UserManager
 import javax.inject.Inject
 
@@ -28,6 +29,8 @@ import javax.inject.Inject
  * @Inject, RegisterationViewModel türünde örneklerin nasıl sağlanacağını söyler.
  * Ayrıca Dagger, UserManager'ın bir bağımlılık olduğunu biliyor.
  * */
+
+@ActivityScope
 class RegistrationViewModel @Inject constructor(val userManager: UserManager) {
 
     private var username: String? = null

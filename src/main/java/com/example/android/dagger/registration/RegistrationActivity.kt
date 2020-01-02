@@ -31,10 +31,13 @@ class RegistrationActivity : AppCompatActivity() {
     @Inject
     lateinit var registrationViewModel: RegistrationViewModel
 
+    //bu örneği fragmentlere enjekt eder
+    lateinit var registrationComponent: RegistrationComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        //bu satır, activity'de bulunan @Inject ile çağırılan alanları doldurur
-        (application as MyApplication).appComponent.inject(this)
+        registrationComponent = (application as MyApplication).appComponent.registrationComponent().create()
+        registrationComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
